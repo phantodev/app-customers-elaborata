@@ -1,0 +1,234 @@
+{
+  "customers": [
+    {
+      "id": "1",
+      "name": "João da Silva",
+      "email": "joao@example.com",
+      "phone": "+5511987654321",
+      "address": "Rua das Flores, 123",
+      "city": "São Paulo",
+      "state": "SP",
+      "postal_code": "01234-567",
+      "country": "Brazil"
+    },
+    {
+      "id": "2",
+      "name": "Maria Oliveira",
+      "email": "maria@example.com",
+      "phone": "+5511888888888",
+      "address": "Avenida Central, 456",
+      "city": "Rio de Janeiro",
+      "state": "RJ",
+      "postal_code": "21000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "3",
+      "name": "Carlos Ferreira",
+      "email": "carlos@example.com",
+      "phone": "+5511555555555",
+      "address": "Rua dos Pássaros, 789",
+      "city": "Belo Horizonte",
+      "state": "MG",
+      "postal_code": "30000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "4",
+      "name": "Ana Santos",
+      "email": "ana@example.com",
+      "phone": "+5511666666666",
+      "address": "Praça das Árvores, 321",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "80000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "5",
+      "name": "Pedro Almeida",
+      "email": "pedro@example.com",
+      "phone": "+5511222222222",
+      "address": "Alameda dos Girassóis, 654",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "postal_code": "90000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "6",
+      "name": "Laura Costa",
+      "email": "laura@example.com",
+      "phone": "+5511333333333",
+      "address": "Avenida das Palmeiras, 987",
+      "city": "Fortaleza",
+      "state": "CE",
+      "postal_code": "60000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "7",
+      "name": "Fernando Martins",
+      "email": "fernando@example.com",
+      "phone": "+5511444444444",
+      "address": "Travessa das Pedras, 234",
+      "city": "Salvador",
+      "state": "BA",
+      "postal_code": "40000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "8",
+      "name": "Mariana Lima",
+      "email": "mariana@example.com",
+      "phone": "+5511555555555",
+      "address": "Rua das Margaridas, 567",
+      "city": "Recife",
+      "state": "PE",
+      "postal_code": "50000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "9",
+      "name": "Ricardo Gomes",
+      "email": "ricardo@example.com",
+      "phone": "+5511666666666",
+      "address": "Avenida das Rosas, 890",
+      "city": "Manaus",
+      "state": "AM",
+      "postal_code": "69000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "10",
+      "name": "Juliana Santos",
+      "email": "juliana@example.com",
+      "phone": "+5511777777777",
+      "address": "Praça das Orquídeas, 111",
+      "city": "Brasília",
+      "state": "DF",
+      "postal_code": "70000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "11",
+      "name": "Luiz Oliveira",
+      "email": "luiz@example.com",
+      "phone": "+5511888888888",
+      "address": "Alameda dos Pinheiros, 222",
+      "city": "Belém",
+      "state": "PA",
+      "postal_code": "66000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "12",
+      "name": "Aline Fernandes",
+      "email": "aline@example.com",
+      "phone": "+5511999999999",
+      "address": "Rua dos Cravos, 333",
+      "city": "Porto Velho",
+      "state": "RO",
+      "postal_code": "76800-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "13",
+      "name": "Gustavo Silva",
+      "email": "gustavo@example.com",
+      "phone": "+5511777777777",
+      "address": "Travessa das Violetas, 444",
+      "city": "Boa Vista",
+      "state": "RR",
+      "postal_code": "69300-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "14",
+      "name": "Camila Sousa",
+      "email": "camila@example.com",
+      "phone": "+5511888888888",
+      "address": "Avenida dos Lírios, 555",
+      "city": "Cuiabá",
+      "state": "MT",
+      "postal_code": "78000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "15",
+      "name": "Roberto Pereira",
+      "email": "roberto@example.com",
+      "phone": "+5511999999999",
+      "address": "Praça dos Crisântemos, 666",
+      "city": "Campo Grande",
+      "state": "MS",
+      "postal_code": "79000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "16",
+      "name": "Cristina Santos",
+      "email": "cristina@example.com",
+      "phone": "+5511666666666",
+      "address": "Rua das Azaléias, 777",
+      "city": "Teresina",
+      "state": "PI",
+      "postal_code": "64000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "17",
+      "name": "Felipe Alves",
+      "email": "felipe@example.com",
+      "phone": "+5511888888888",
+      "address": "Alameda das Hortênsias, 888",
+      "city": "Natal",
+      "state": "RN",
+      "postal_code": "59000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "18",
+      "name": "Carolina Rodrigues",
+      "email": "carolina@example.com",
+      "phone": "+5511999999999",
+      "address": "Travessa dos Cravos, 999",
+      "city": "João Pessoa",
+      "state": "PB",
+      "postal_code": "58000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "19",
+      "name": "Fernanda Lima",
+      "email": "fernanda@example.com",
+      "phone": "+5511222222222",
+      "address": "Rua das Papoulas, 123",
+      "city": "Maceió",
+      "state": "AL",
+      "postal_code": "57000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "20",
+      "name": "Lucas Fernandes",
+      "email": "lucas@example.com",
+      "phone": "+5511888888888",
+      "address": "Avenida dos Gerânios, 456",
+      "city": "Aracaju",
+      "state": "SE",
+      "postal_code": "49000-000",
+      "country": "Brazil"
+    }
+  ],
+  "login": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1MTYyMzkwMjJ9.-zjVpC2Mgi3dSYxV5gH6TfjvBm7Fk12c7FJH65Gx",
+    "user": {
+      "id": 123,
+      "username": "example_user",
+      "email": "user@example.com",
+      "roles": ["user"]
+    },
+    "expires_in": 3600
+  }
+}
