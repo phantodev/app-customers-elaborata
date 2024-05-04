@@ -1,12 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LogOut, Menu } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
   return (
     <main className="flex flex-col h-screen">
       <section className="bg-black h-20 w-fulll p-4 flex justify-between">
@@ -23,10 +27,14 @@ export default function RootLayout({
           id="MENU"
           className="hidden lg:flex flex-1 items-center justify-center">
           <ul className="text-white text-sm font-semibold flex gap-10">
-            <li>Dashboard</li>
-            <li>Clientes</li>
-            <li>Usuários</li>
-            <li>Meu Perfil</li>
+            <li onClick={() => router.push("/dashboard/")}>Dashboard</li>
+            <li onClick={() => router.push("/dashboard/customers")}>
+              Clientes
+            </li>
+            <li onClick={() => router.push("/dashboard/users")}>Usuários</li>
+            <li onClick={() => router.push("/dashboard/my-profile")}>
+              Meu Perfil
+            </li>
           </ul>
         </section>
         <section

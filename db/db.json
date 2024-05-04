@@ -1,17 +1,6 @@
 {
   "customers": [
     {
-      "id": "1",
-      "name": "João da Silva",
-      "email": "joao@example.com",
-      "phone": "+5511987654321",
-      "address": "Rua das Flores, 123",
-      "city": "São Paulo",
-      "state": "SP",
-      "postal_code": "01234-567",
-      "country": "Brazil"
-    },
-    {
       "id": "2",
       "name": "Maria Oliveira",
       "email": "maria@example.com",
@@ -97,17 +86,6 @@
       "city": "Manaus",
       "state": "AM",
       "postal_code": "69000-000",
-      "country": "Brazil"
-    },
-    {
-      "id": "10",
-      "name": "Juliana Santos",
-      "email": "juliana@example.com",
-      "phone": "+5511777777777",
-      "address": "Praça das Orquídeas, 111",
-      "city": "Brasília",
-      "state": "DF",
-      "postal_code": "70000-000",
       "country": "Brazil"
     },
     {
@@ -219,6 +197,94 @@
       "state": "SE",
       "postal_code": "49000-000",
       "country": "Brazil"
+    },
+    {
+      "id": "bd05",
+      "name": "Mirão Burko",
+      "email": "mirao@example.com",
+      "phone": "+5511666666666",
+      "address": "Praça das Árvores, 321",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "80000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "5c4c",
+      "name": "Eduardo Burko",
+      "email": "edu@edu.com",
+      "phone": "41997602541",
+      "address": "Rua Xing Ling",
+      "city": "Curitiba",
+      "state": "Paraná",
+      "postal_code": "81170370",
+      "country": "Brasil"
+    },
+    {
+      "id": "6e36",
+      "name": "Ricardo XIng Ling",
+      "email": "ricardo@ricardo.com",
+      "phone": "41999999999",
+      "address": "Rua Jaspion 192",
+      "city": "São Paulo",
+      "state": "SP",
+      "postal_code": "80560259",
+      "country": "Brasil"
+    },
+    {
+      "id": "7102",
+      "name": "Helena Jiraia",
+      "email": "helena@helena.com",
+      "phone": "4195922952929",
+      "address": "Rua do Jasipon",
+      "city": "Balneário Camburiu",
+      "state": "SC",
+      "postal_code": "81170370",
+      "country": "Brasil"
+    },
+    {
+      "id": "1dbc",
+      "name": "Gustavo Silva",
+      "email": "gugu@gugu.com",
+      "phone": "4197978879898",
+      "address": "Rua do Powerranger",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81959569589",
+      "country": "Brasil"
+    },
+    {
+      "id": "ced1",
+      "name": "Gustavo Silva",
+      "email": "gugu@gugu.com",
+      "phone": "4197978879898",
+      "address": "Rua do Powerranger",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81959569589",
+      "country": "Brasil"
+    },
+    {
+      "id": "97f4",
+      "name": "Carlos Eduardo Burko",
+      "email": "kduburko@gmail.com",
+      "phone": "(41) 99760-2541",
+      "address": "Rua Angelina Turesso Cavalim, 192",
+      "city": "CURITBA",
+      "state": "PARANÁ",
+      "postal_code": "81170-370",
+      "country": "Brasil"
+    },
+    {
+      "id": "0fb4",
+      "name": "Dudu Chines",
+      "email": "china@china.com",
+      "phone": "419898898998",
+      "address": "Rua China, 1455",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81708710171",
+      "country": "Brasil"
     }
   ],
   "login": {
@@ -227,7 +293,9 @@
       "id": 123,
       "username": "example_user",
       "email": "user@example.com",
-      "roles": ["user"]
+      "roles": [
+        "user"
+      ]
     },
     "expires_in": 3600
   }

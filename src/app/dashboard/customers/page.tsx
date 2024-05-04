@@ -30,20 +30,12 @@ import {
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Spinner } from "@/components/ui/spinner";
-
-interface ICustomer {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  postal_code: string;
-  country?: string;
-}
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
+  const router = useRouter();
   const [customers, setCustomers] = useState<ICustomer[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -64,23 +56,35 @@ export default function Dashboard() {
   return (
     <main className="flex flex-col items-center justify-start p-8 gap-10 flex-1">
       <section className="w-full max-w-7xl flex flex-col">
-        <section>
+        <section className="flex justify-between">
           <section className="mb-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/components">
-                    Lista de Clientes
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
+            <section>
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="/components">
+                      Lista de Cliente
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
+            </section>
+            <section className="text-2xl font-semibold">CLIENTES</section>
           </section>
-          <section className="text-2xl font-semibold">CLIENTES</section>
+          <section>
+            <Button
+              onClick={() => router.push("/dashboard/customers/add")}
+              type="button"
+              variant="outline"
+              className="text-primary flex gap-2 !pl-2">
+              <Plus />
+              Adicionar Clientes
+            </Button>
+          </section>
         </section>
         {!loading ? (
           <>
@@ -140,7 +144,7 @@ export default function Dashboard() {
           </>
         ) : (
           <section className="mt-20 flex flex-col gap-4 font-semibold justify-center items-center">
-            <Spinner />
+            <Spinner size="w-20 h-20" />
             Carregando dados
           </section>
         )}
