@@ -1,5 +1,7 @@
 "use client";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -33,11 +35,39 @@ import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
+import {
+  Description,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Transition,
+} from "@headlessui/react";
 
 export default function Dashboard() {
   const router = useRouter();
   const [customers, setCustomers] = useState<ICustomer[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [customerToDelete, setCustomerToDelete] = useState<number>();
+
+  function handleOpenDialog(idCustomer: number) {
+    setCustomerToDelete(idCustomer);
+    setIsOpen(true);
+  }
+
+  async function handleDeleteCustomer() {
+    try {
+      setIsDeleting(true);
+      await axios.delete(`http://localhost:4000/customers/${customerToDelete}`);
+      await fetchAllCustomers();
+      setIsOpen(false);
+      setIsDeleting(false);
+    } catch (error) {
+      toast.error("Problemas de conexão com a API. Tente mais tarde!");
+      setIsOpen(false);
+    }
+  }
 
   async function fetchAllCustomers() {
     try {
@@ -55,6 +85,46 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col items-center justify-start p-8 gap-10 flex-1">
+      <Transition
+        show={isOpen}
+        enter="duration-500 ease-out"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="duration-500 ease-out"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0">
+        <Dialog
+          open={isOpen}
+          onClose={() => setIsOpen(false)}
+          className="relative z-50">
+          <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50">
+            <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
+              <DialogTitle className="font-bold text-2xl">
+                Excluir registro?
+              </DialogTitle>
+              <p>
+                Você irá excluir este registro para sempre do banco de dados!
+              </p>
+              <div className="flex gap-4 justify-end">
+                <Button
+                  variant="outline"
+                  disabled={isDeleting}
+                  onClick={() => setIsOpen(false)}
+                  className="w-20">
+                  Cancel
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={handleDeleteCustomer}
+                  className={isDeleting ? "w-20 opacity-50" : "w-20"}
+                  disabled={isDeleting}>
+                  {isDeleting ? <Spinner size="w-4 h-4" /> : "Excluir"}
+                </Button>
+              </div>
+            </DialogPanel>
+          </div>
+        </Dialog>
+      </Transition>
       <section className="w-full max-w-7xl flex flex-col">
         <section className="flex justify-between">
           <section className="mb-4">
@@ -108,7 +178,11 @@ export default function Dashboard() {
                       <TableCell>{customer.city}</TableCell>
                       <TableCell className="text-right ">
                         <button className="text-blue-500">Editar</button>
-                        <button className="text-red-500 ml-4">Excluir</button>
+                        <button
+                          className="text-red-500 ml-4"
+                          onClick={() => handleOpenDialog(customer.id)}>
+                          Excluir
+                        </button>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -149,6 +223,7 @@ export default function Dashboard() {
           </section>
         )}
       </section>
+      <ToastContainer />
     </main>
   );
 }
