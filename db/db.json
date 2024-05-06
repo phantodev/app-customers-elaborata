@@ -292,10 +292,8 @@
     "user": {
       "id": 123,
       "username": "example_user",
-      "email": "user@example.com",
-      "roles": [
-        "user"
-      ]
+      "email": "eduardo@example.com",
+      "roles": ["user"]
     },
     "expires_in": 3600
   }
