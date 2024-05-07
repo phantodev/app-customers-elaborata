@@ -42,6 +42,8 @@ import {
   DialogTitle,
   Transition,
 } from "@headlessui/react";
+import { ICustomer } from "@/interfaces/Customers";
+import { useStore } from "@/stores";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -50,10 +52,16 @@ export default function Dashboard() {
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [customerToDelete, setCustomerToDelete] = useState<number>();
+  const store = useStore();
 
   function handleOpenDialog(idCustomer: number) {
     setCustomerToDelete(idCustomer);
     setIsOpen(true);
+  }
+
+  function handleUpdateCustomer(customer: ICustomer) {
+    store.setCustomerToUpdate(customer);
+    router.push("/dashboard/customers/add");
   }
 
   async function handleDeleteCustomer() {
@@ -72,7 +80,7 @@ export default function Dashboard() {
   async function fetchAllCustomers() {
     try {
       // Simula um atraso de 2 segundos (2000 milissegundos)
-      await new Promise((resolve) => setTimeout(resolve, 4000));
+      // await new Promise((resolve) => setTimeout(resolve, 4000));
       const response = await axios.get("http://localhost:4000/customers");
       setCustomers(response.data);
       setLoading(false);
@@ -177,7 +185,11 @@ export default function Dashboard() {
                       <TableCell>{customer.name}</TableCell>
                       <TableCell>{customer.city}</TableCell>
                       <TableCell className="text-right ">
-                        <button className="text-blue-500">Editar</button>
+                        <button
+                          className="text-blue-500"
+                          onClick={() => handleUpdateCustomer(customer)}>
+                          Editar
+                        </button>
                         <button
                           className="text-red-500 ml-4"
                           onClick={() => handleOpenDialog(customer.id)}>

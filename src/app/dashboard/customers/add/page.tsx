@@ -24,10 +24,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import { CustomerZodSchema } from "@/schemas/CustomerZodSchema";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { useStore } from "@/stores";
 
 export default function Dashboard() {
+  const store = useStore();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const {
@@ -54,6 +56,10 @@ export default function Dashboard() {
       setLoading(false);
     } catch (error) {}
   };
+
+  useEffect(() => {
+    // console.log(store.customerToUpdate);
+  }, [store]);
 
   return (
     <main className="flex flex-col items-center justify-center p-8 gap-10">
@@ -99,6 +105,7 @@ export default function Dashboard() {
                       id="name"
                       type="text"
                       placeholder="Digite o nome"
+                      defaultValue={store.customerToUpdate?.name}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("name")}
                     />
@@ -112,6 +119,7 @@ export default function Dashboard() {
                       id="email"
                       type="text"
                       placeholder="Digite o e-mail"
+                      defaultValue={store.customerToUpdate?.email}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("email")}
                     />
@@ -125,6 +133,7 @@ export default function Dashboard() {
                       id="phone"
                       type="text"
                       placeholder="Digite o telefone"
+                      defaultValue={store.customerToUpdate?.phone}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("phone")}
                     />
@@ -138,6 +147,7 @@ export default function Dashboard() {
                       id="address"
                       type="text"
                       placeholder="Digite o endereço"
+                      defaultValue={store.customerToUpdate?.address}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("address")}
                     />
@@ -151,6 +161,7 @@ export default function Dashboard() {
                       id="city"
                       type="text"
                       placeholder="Digite a cidade"
+                      defaultValue={store.customerToUpdate?.city}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("city")}
                     />
@@ -164,6 +175,7 @@ export default function Dashboard() {
                       id="state"
                       type="text"
                       placeholder="Digite o estado"
+                      defaultValue={store.customerToUpdate?.state}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("state")}
                     />
@@ -177,6 +189,7 @@ export default function Dashboard() {
                       id="postal_code"
                       type="text"
                       placeholder="Digite o código postal"
+                      defaultValue={store.customerToUpdate?.postal_code}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("postal_code")}
                     />
@@ -190,6 +203,7 @@ export default function Dashboard() {
                       id="country"
                       type="text"
                       placeholder="Digite o país"
+                      defaultValue={store.customerToUpdate?.country}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("country")}
                     />
