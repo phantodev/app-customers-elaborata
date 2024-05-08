@@ -24,9 +24,10 @@ import {
 } from "@/components/ui/breadcrumb";
 import { CustomerZodSchema } from "@/schemas/CustomerZodSchema";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { useStore } from "@/stores";
+import { IAddress } from "@/interfaces/Customers";
 
 export default function Dashboard() {
   const store = useStore();
@@ -37,20 +38,50 @@ export default function Dashboard() {
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(CustomerZodSchema),
   });
+
+  const postalCode = watch("postal_code");
+
+  const getCEP: any = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `http://viacep.com.br/ws/${postalCode}/json/`
+      );
+      setValue("address", response.data.logradouro);
+      setValue("city", response.data.localidade);
+      setValue("state", response.data.uf);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [postalCode, setValue]);
+
+  useEffect(() => {
+    if (postalCode !== undefined && postalCode.length === 8) {
+      getCEP();
+    }
+  }, [postalCode, getCEP]);
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
     try {
       // Simula um atraso de 2 segundos (2000 milissegundos)
       await new Promise((resolve) => setTimeout(resolve, 4000));
-      const response = await axios.post(
-        "http://localhost:4000/customers",
-        data
-      );
+      if (store.customerToUpdate === null) {
+        const response = await axios.post(
+          "http://localhost:4000/customers",
+          data
+        );
+      } else {
+        const response = await axios.put(
+          `http://localhost:4000/customers/${store.customerToUpdate.id}`,
+          data
+        );
+      }
+
       reset();
       toast.success("Cadastro efetuado com sucesso!");
       setLoading(false);
@@ -105,6 +136,7 @@ export default function Dashboard() {
                       id="name"
                       type="text"
                       placeholder="Digite o nome"
+                      readOnly={store.customerToUpdate !== null ? true : false}
                       defaultValue={store.customerToUpdate?.name}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("name")}
@@ -139,6 +171,34 @@ export default function Dashboard() {
                     />
                     <p className="text-red-600 text-xs mt-2">
                       {errors.phone?.message}
+                    </p>
+                  </section>
+                  <section>
+                    <Label htmlFor="country">País</Label>
+                    <Input
+                      id="country"
+                      type="text"
+                      placeholder="Digite o país"
+                      defaultValue={store.customerToUpdate?.country}
+                      className={errors.name?.message ? "border-red-500" : ""}
+                      {...register("country")}
+                    />
+                    <p className="text-red-600 text-xs mt-2">
+                      {errors.country?.message}
+                    </p>
+                  </section>
+                  <section>
+                    <Label htmlFor="postal_code">Código Postal</Label>
+                    <Input
+                      id="postal_code"
+                      type="text"
+                      placeholder="Digite o código postal"
+                      defaultValue={store.customerToUpdate?.postal_code}
+                      className={errors.name?.message ? "border-red-500" : ""}
+                      {...register("postal_code")}
+                    />
+                    <p className="text-red-600 text-xs mt-2">
+                      {errors.postal_code?.message}
                     </p>
                   </section>
                   <section>
@@ -181,34 +241,6 @@ export default function Dashboard() {
                     />
                     <p className="text-red-600 text-xs mt-2">
                       {errors.state?.message}
-                    </p>
-                  </section>
-                  <section>
-                    <Label htmlFor="postal_code">Código Postal</Label>
-                    <Input
-                      id="postal_code"
-                      type="text"
-                      placeholder="Digite o código postal"
-                      defaultValue={store.customerToUpdate?.postal_code}
-                      className={errors.name?.message ? "border-red-500" : ""}
-                      {...register("postal_code")}
-                    />
-                    <p className="text-red-600 text-xs mt-2">
-                      {errors.postal_code?.message}
-                    </p>
-                  </section>
-                  <section>
-                    <Label htmlFor="country">País</Label>
-                    <Input
-                      id="country"
-                      type="text"
-                      placeholder="Digite o país"
-                      defaultValue={store.customerToUpdate?.country}
-                      className={errors.name?.message ? "border-red-500" : ""}
-                      {...register("country")}
-                    />
-                    <p className="text-red-600 text-xs mt-2">
-                      {errors.country?.message}
                     </p>
                   </section>
                 </section>

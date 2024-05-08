@@ -155,7 +155,10 @@ export default function Dashboard() {
           </section>
           <section>
             <Button
-              onClick={() => router.push("/dashboard/customers/add")}
+              onClick={() => {
+                router.push("/dashboard/customers/add");
+                store.setCustomerToUpdate(null);
+              }}
               type="button"
               variant="outline"
               className="text-primary flex gap-2 !pl-2">

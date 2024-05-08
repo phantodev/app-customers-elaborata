@@ -1,15 +1,15 @@
 {
   "customers": [
     {
-      "id": "4",
       "name": "Ana Santos",
-      "email": "ana@example.com",
+      "email": "anasantos@example.com",
       "phone": "+5511666666666",
       "address": "Praça das Árvores, 321",
       "city": "Curitiba",
       "state": "PR",
       "postal_code": "80000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "id": "4"
     },
     {
       "id": "5",
@@ -175,6 +175,17 @@
       "state": "SE",
       "postal_code": "49000-000",
       "country": "Brazil"
+    },
+    {
+      "name": "Carlos Marçal",
+      "email": "eduardo@dotmidia.com.br",
+      "phone": "+55 41997602541",
+      "address": "Rua Jaime Reis",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81170-370",
+      "country": "Brasil",
+      "id": "0dcb"
     }
   ],
   "login": {
