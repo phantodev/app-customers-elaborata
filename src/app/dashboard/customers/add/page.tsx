@@ -33,6 +33,8 @@ export default function Dashboard() {
   const store = useStore();
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingCEP, setLoadingCEP] = useState<boolean>(false);
+  const [errorCEP, setErrorCEP] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -48,22 +50,35 @@ export default function Dashboard() {
 
   const getCEP: any = useCallback(async () => {
     try {
+      setLoadingCEP(true);
+      await new Promise((resolve) => setTimeout(resolve, 4000));
       const response = await axios.get(
         `http://viacep.com.br/ws/${postalCode}/json/`
       );
       setValue("address", response.data.logradouro);
       setValue("city", response.data.localidade);
       setValue("state", response.data.uf);
+      setLoadingCEP(false);
     } catch (error) {
-      console.log(error);
+      setLoadingCEP(false);
+      setErrorCEP(true);
     }
+  }, [postalCode, setValue]);
+
+  const formatCEP: any = useCallback(async () => {
+    const postalCodeWithoutHyphen = postalCode;
+    setValue(
+      "postal_code",
+      postalCodeWithoutHyphen.replace(/(\d{5})(\d{3})/, "$1-$2")
+    );
   }, [postalCode, setValue]);
 
   useEffect(() => {
     if (postalCode !== undefined && postalCode.length === 8) {
+      formatCEP();
       getCEP();
     }
-  }, [postalCode, getCEP]);
+  }, [postalCode, getCEP, formatCEP]);
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
     setLoading(true);
@@ -189,16 +204,24 @@ export default function Dashboard() {
                   </section>
                   <section>
                     <Label htmlFor="postal_code">Código Postal</Label>
-                    <Input
-                      id="postal_code"
-                      type="text"
-                      placeholder="Digite o código postal"
-                      defaultValue={store.customerToUpdate?.postal_code}
-                      className={errors.name?.message ? "border-red-500" : ""}
-                      {...register("postal_code")}
-                    />
+                    <section className="relative">
+                      <Input
+                        id="postal_code"
+                        type="text"
+                        placeholder="Digite o código postal"
+                        defaultValue={store.customerToUpdate?.postal_code}
+                        className={errors.name?.message ? "border-red-500" : ""}
+                        {...register("postal_code")}
+                      />
+                      {loadingCEP && (
+                        <section className="absolute top-[10px] right-3 text-black">
+                          <Spinner size="w-4 h-4" />
+                        </section>
+                      )}
+                    </section>
                     <p className="text-red-600 text-xs mt-2">
                       {errors.postal_code?.message}
+                      {errorCEP && "CEP não encontrado"}
                     </p>
                   </section>
                   <section>
@@ -207,6 +230,7 @@ export default function Dashboard() {
                       id="address"
                       type="text"
                       placeholder="Digite o endereço"
+                      readOnly
                       defaultValue={store.customerToUpdate?.address}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("address")}
@@ -221,6 +245,7 @@ export default function Dashboard() {
                       id="city"
                       type="text"
                       placeholder="Digite a cidade"
+                      readOnly
                       defaultValue={store.customerToUpdate?.city}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("city")}
@@ -235,6 +260,7 @@ export default function Dashboard() {
                       id="state"
                       type="text"
                       placeholder="Digite o estado"
+                      readOnly
                       defaultValue={store.customerToUpdate?.state}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("state")}
