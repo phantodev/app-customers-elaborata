@@ -4,6 +4,7 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 interface Store {
   customerName: string;
+  minhaVarQueONetoVaiUsar: string;
   setCustometName: () => void;
   customerToUpdate: ICustomer | null;
   setCustomerToUpdate: (customer: ICustomer | null) => void;
@@ -13,6 +14,7 @@ export const useStore = create<Store>()(
   persist(
     (set) => ({
       customerName: "Eduardo Burko",
+      minhaVarQueONetoVaiUsar: "minhaVarQueONetoVaiUsar",
       setCustometName: () =>
         set((state) => ({ customerName: state.customerName })),
       customerToUpdate: null,

@@ -22,3 +22,8 @@ export interface IAddress {
   ddd: string;
   siafi: string;
 }
+
+export interface IHowMeet {
+  id: number;
+  name: string;
+}

@@ -37,7 +37,6 @@ export default function RootLayout({
                 alt="Logo NextJS"
                 width={150}
                 height={50}
-                className=""
               />
             </section>
             <section

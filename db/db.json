@@ -186,6 +186,19 @@
       "postal_code": "81170-370",
       "country": "Brasil",
       "id": "0dcb"
+    },
+    {
+      "id": "a6cd",
+      "name": "Eduardo Burko",
+      "cpf": "032.924.479-50",
+      "how_meet": "Facebook",
+      "email": "kduburko@gmail.com",
+      "phone": "(41) 01266-2666",
+      "address": "Rua Angelina Turesso Cavalim",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81170-370",
+      "country": "Brasil"
     }
   ],
   "login": {

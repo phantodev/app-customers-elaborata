@@ -54,15 +54,15 @@ export default function Login() {
     if (validateForm()) {
       try {
         const options = {
-          method: "POST",
+          method: "GET",
           url: "http://localhost:4000/login",
           headers: {
             "Content-Type": "application/json",
-            "api-key": "74cc79460fmsh3c6d0abcb93703cp140eb4jsn8975796733b1",
           },
           body: JSON.stringify({ email: email, password: password }),
         };
-        const response = await fetch("http://localhost:4000/login", options);
+        // const response = await fetch("http://localhost:4000/login", options);
+        const response = await fetch("http://localhost:4000/login");
         const data = await response.json();
         if (data.token) {
           localStorage.setItem("dataAppCustomers", JSON.stringify(data));
