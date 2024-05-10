@@ -186,7 +186,7 @@ using `zodResolver` with a Zod schema (`CustomerZodSchema`) for form validation.
           </section>
         </section>
         <section>
-          {/* <form onSubmit={handleSubmit(processForm)}>
+          <form onSubmit={handleSubmit(processForm)}>
             <Card className="w-full mt-10">
               <CardContent>
                 <section className="grid grid-cols-1 lg:grid-cols-3 w-full items-center gap-4 mt-6 ">
@@ -346,7 +346,7 @@ using `zodResolver` with a Zod schema (`CustomerZodSchema`) for form validation.
                 </Button>
               </CardFooter>
             </Card>
-          </form> */}
+          </form>
         </section>
       </section>
       <ToastContainer />

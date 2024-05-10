@@ -199,6 +199,195 @@
       "state": "PR",
       "postal_code": "81170-370",
       "country": "Brasil"
+    },
+    {
+      "id": "25",
+      "name": "Pedro Almeida",
+      "email": "pedro@example.com",
+      "phone": "+5511222222222",
+      "address": "Alameda dos Girassóis, 654",
+      "city": "Porto Alegre",
+      "state": "RS",
+      "postal_code": "90000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "26",
+      "name": "Laura Costa",
+      "email": "laura@example.com",
+      "phone": "+5511333333333",
+      "address": "Avenida das Palmeiras, 987",
+      "city": "Fortaleza",
+      "state": "CE",
+      "postal_code": "60000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "27",
+      "name": "Fernando Martins",
+      "email": "fernando@example.com",
+      "phone": "+5511444444444",
+      "address": "Travessa das Pedras, 234",
+      "city": "Salvador",
+      "state": "BA",
+      "postal_code": "40000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "28",
+      "name": "Mariana Lima",
+      "email": "mariana@example.com",
+      "phone": "+5511555555555",
+      "address": "Rua das Margaridas, 567",
+      "city": "Recife",
+      "state": "PE",
+      "postal_code": "50000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "29",
+      "name": "Ricardo Gomes",
+      "email": "ricardo@example.com",
+      "phone": "+5511666666666",
+      "address": "Avenida das Rosas, 890",
+      "city": "Manaus",
+      "state": "AM",
+      "postal_code": "69000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "211",
+      "name": "Luiz Oliveira",
+      "email": "luiz@example.com",
+      "phone": "+5511888888888",
+      "address": "Alameda dos Pinheiros, 222",
+      "city": "Belém",
+      "state": "PA",
+      "postal_code": "66000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "212",
+      "name": "Aline Fernandes",
+      "email": "aline@example.com",
+      "phone": "+5511999999999",
+      "address": "Rua dos Cravos, 333",
+      "city": "Porto Velho",
+      "state": "RO",
+      "postal_code": "76800-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "213",
+      "name": "Gustavo Silva",
+      "email": "gustavo@example.com",
+      "phone": "+5511777777777",
+      "address": "Travessa das Violetas, 444",
+      "city": "Boa Vista",
+      "state": "RR",
+      "postal_code": "69300-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "214",
+      "name": "Camila Sousa",
+      "email": "camila@example.com",
+      "phone": "+5511888888888",
+      "address": "Avenida dos Lírios, 555",
+      "city": "Cuiabá",
+      "state": "MT",
+      "postal_code": "78000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "215",
+      "name": "Roberto Pereira",
+      "email": "roberto@example.com",
+      "phone": "+5511999999999",
+      "address": "Praça dos Crisântemos, 666",
+      "city": "Campo Grande",
+      "state": "MS",
+      "postal_code": "79000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "216",
+      "name": "Cristina Santos",
+      "email": "cristina@example.com",
+      "phone": "+5511666666666",
+      "address": "Rua das Azaléias, 777",
+      "city": "Teresina",
+      "state": "PI",
+      "postal_code": "64000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "217",
+      "name": "Felipe Alves",
+      "email": "felipe@example.com",
+      "phone": "+5511888888888",
+      "address": "Alameda das Hortênsias, 888",
+      "city": "Natal",
+      "state": "RN",
+      "postal_code": "59000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "218",
+      "name": "Carolina Rodrigues",
+      "email": "carolina@example.com",
+      "phone": "+5511999999999",
+      "address": "Travessa dos Cravos, 999",
+      "city": "João Pessoa",
+      "state": "PB",
+      "postal_code": "58000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "219",
+      "name": "Fernanda Lima",
+      "email": "fernanda@example.com",
+      "phone": "+5511222222222",
+      "address": "Rua das Papoulas, 123",
+      "city": "Maceió",
+      "state": "AL",
+      "postal_code": "57000-000",
+      "country": "Brazil"
+    },
+    {
+      "id": "220",
+      "name": "Lucas Fernandes",
+      "email": "lucas@example.com",
+      "phone": "+5511888888888",
+      "address": "Avenida dos Gerânios, 456",
+      "city": "Aracaju",
+      "state": "SE",
+      "postal_code": "49000-000",
+      "country": "Brazil"
+    },
+    {
+      "name": "Carlos Marçal",
+      "email": "eduardo@dotmidia.com.br",
+      "phone": "+55 41997602541",
+      "address": "Rua Jaime Reis",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81170-370",
+      "country": "Brasil",
+      "id": "20dcb"
+    },
+    {
+      "id": "2a6cd",
+      "name": "Eduardo Burko",
+      "cpf": "032.924.479-50",
+      "how_meet": "Facebook",
+      "email": "kduburko@gmail.com",
+      "phone": "(41) 01266-2666",
+      "address": "Rua Angelina Turesso Cavalim",
+      "city": "Curitiba",
+      "state": "PR",
+      "postal_code": "81170-370",
+      "country": "Brasil"
     }
   ],
   "login": {
@@ -207,9 +396,7 @@
       "id": 123,
       "username": "example_user",
       "email": "eduardo@example.com",
-      "roles": [
-        "user"
-      ]
+      "roles": ["user"]
     },
     "expires_in": 3600
   }

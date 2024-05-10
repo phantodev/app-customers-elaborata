@@ -20,17 +20,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@/components/ui/pagination";
+// import {
+//   Pagination,
+//   PaginationContent,
+//   PaginationEllipsis,
+//   PaginationItem,
+//   PaginationLink,
+//   PaginationNext,
+//   PaginationPrevious,
+// } from "@/components/ui/pagination";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -42,15 +42,25 @@ import {
   DialogTitle,
   Transition,
 } from "@headlessui/react";
-import { ICustomer } from "@/interfaces/Customers";
+import {
+  ICustomer,
+  ICustomerResponseWithPagiation,
+} from "@/interfaces/Customers";
 import { useStore } from "@/stores";
+import {
+  Pagination,
+  PaginationItem,
+  PaginationCursor,
+} from "@nextui-org/pagination";
+import CardCustomer from "@/components/ui/cardCustomer";
 
 export default function Dashboard() {
   const router = useRouter();
-  const [customers, setCustomers] = useState<ICustomer[]>([]);
+  const [customers, setCustomers] = useState<ICustomerResponseWithPagiation>();
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [page, setPage] = useState(1);
   const [customerToDelete, setCustomerToDelete] = useState<number>();
   const store = useStore();
 
@@ -77,19 +87,41 @@ export default function Dashboard() {
     }
   }
 
-  async function fetchAllCustomers() {
+  const fetchAllCustomers = useCallback(async () => {
     try {
       // Simula um atraso de 2 segundos (2000 milissegundos)
       // await new Promise((resolve) => setTimeout(resolve, 4000));
-      const response = await axios.get("http://localhost:4000/customers");
+      const response = await axios.get(
+        `http://localhost:4000/customers?_page=${page}&_per_page=4`
+      );
       setCustomers(response.data);
       setLoading(false);
     } catch (error) {}
-  }
+  }, [page]);
 
   useEffect(() => {
     fetchAllCustomers();
-  }, []);
+  }, [fetchAllCustomers]);
+
+  // Função para montar a paginação
+  // function montPagination() {
+  //   // const pages = customers?.last_page || 0;
+  //   const pageItems = [];
+  //   if (customers?.pages !== undefined) {
+  //     for (let i = 1; i <= customers?.pages; i++) {
+  //       pageItems.push(
+  //         <PaginationItem key={i}>
+  //           <PaginationLink href="#">{i}</PaginationLink>
+  //         </PaginationItem>
+  //       );
+  //     }
+  //   }
+  //   return pageItems;
+  // }
+
+  function handlePage(page: number) {
+    setPage(page);
+  }
 
   return (
     <main className="flex flex-col items-center justify-start p-8 gap-10 flex-1">
@@ -169,7 +201,14 @@ export default function Dashboard() {
         </section>
         {!loading ? (
           <>
-            <section className="mt-6 overflow-x-auto">
+            <section id="CARDS-CUSTOMERS">
+              {customers?.data.map((customer) => (
+                <CardCustomer customer={customer} key={customer.id} />
+              ))}
+            </section>
+            <section
+              id="TABLE-CUSTOMERS"
+              className="hidden sm:flex mt-6 overflow-x-auto">
               <Table className="w-full min-w-[800px]">
                 <TableHeader>
                   <TableRow>
@@ -180,7 +219,7 @@ export default function Dashboard() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {customers.map((customer) => (
+                  {customers?.data.map((customer) => (
                     <TableRow key={customer.id}>
                       <TableCell className="font-medium">
                         {customer.id}
@@ -204,31 +243,64 @@ export default function Dashboard() {
                 </TableBody>
               </Table>
             </section>
-            <section className="mt-10">
+            {/* <section className="mt-10">
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
-                    <PaginationPrevious href="#" />
+                    <Button
+                      disabled={customers?.prev === null ? true : false}
+                      onClick={() => {
+                        customers?.prev !== null
+                          ? setPage(customers?.prev ?? 1)
+                          : page;
+                      }}>
+                      Anterior
+                    </Button>
                   </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#" isActive>
-                      2
-                    </PaginationLink>
-                  </PaginationItem>
-                  <PaginationItem>
-                    <PaginationLink href="#">3</PaginationLink>
-                  </PaginationItem>
+                  {montPagination()}
+                  {
+                    <>
+                      {customers?.pages !== undefined && (
+                        <>
+                          {Array.from({ length: customers?.pages }, (_, i) => (
+                            <PaginationItem key={i + 1}>
+                              <PaginationLink
+                                onClick={() => setPage(i + 1)}
+                                className="cursor-pointer"
+                                isActive={i + 1 === page}>
+                                {i + 1}
+                              </PaginationLink>
+                            </PaginationItem>
+                          ))}
+                        </>
+                      )}
+                    </>
+                  }
+
                   <PaginationItem>
                     <PaginationEllipsis />
                   </PaginationItem>
                   <PaginationItem>
-                    <PaginationNext href="#" />
+                    <Button
+                      disabled={customers?.next === null ? true : false}
+                      onClick={() => {
+                        customers?.next !== null
+                          ? setPage(customers?.next ?? 1)
+                          : page;
+                      }}>
+                      Próximo
+                    </Button>
                   </PaginationItem>
                 </PaginationContent>
               </Pagination>
+            </section> */}
+            <section className="hidden sm:flex mt-10 justify-center">
+              <Pagination
+                total={10}
+                initialPage={1}
+                showControls
+                onChange={handlePage}
+              />
             </section>
           </>
         ) : (

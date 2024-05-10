@@ -1,6 +1,7 @@
 export interface ICustomer {
   id: number;
   name: string;
+  cpf: string;
   email: string;
   phone: string;
   address: string;
@@ -8,6 +9,16 @@ export interface ICustomer {
   state: string;
   postal_code: string;
   country?: string;
+}
+
+export interface ICustomerResponseWithPagiation {
+  first: number;
+  prev: number | null;
+  next: number | null;
+  last: number;
+  pages: number;
+  items: number;
+  data: ICustomer[];
 }
 
 export interface IAddress {
