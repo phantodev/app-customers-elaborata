@@ -30,7 +30,7 @@ import {
 //   PaginationPrevious,
 // } from "@/components/ui/pagination";
 import axios from "axios";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
@@ -53,15 +53,30 @@ import {
   PaginationCursor,
 } from "@nextui-org/pagination";
 import CardCustomer from "@/components/ui/cardCustomer";
+import { Button as Dudu, ButtonGroup } from "@nextui-org/button";
+import InfiniteScroll from "react-infinite-scroll-component";
+import InfiniteLoader from "@/components/ui/infiniteLoader";
 
-export default function Dashboard() {
+export default function ListCustomers() {
   const router = useRouter();
-  const [customers, setCustomers] = useState<ICustomerResponseWithPagiation>();
+  const [customers, setCustomers] = useState<ICustomerResponseWithPagiation>({
+    first: 0,
+    prev: 0,
+    next: 0,
+    last: 0,
+    pages: 0,
+    items: 0,
+    data: [],
+  });
+  const [customersInfinite, setCustomersInfinite] = useState<ICustomer[]>([]);
+  const customersInfiniteRef = useRef(customersInfinite);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [page, setPage] = useState(1);
-  const [customerToDelete, setCustomerToDelete] = useState<number>();
+  const pageRef = useRef(page);
+  const [customerToDelete, setCustomerToDelete] = useState<number>(0);
+  const [lenghtCustomers, setLenghtCustomers] = useState(-1);
   const store = useStore();
 
   function handleOpenDialog(idCustomer: number) {
@@ -90,14 +105,31 @@ export default function Dashboard() {
   const fetchAllCustomers = useCallback(async () => {
     try {
       // Simula um atraso de 2 segundos (2000 milissegundos)
-      // await new Promise((resolve) => setTimeout(resolve, 4000));
+      await new Promise((resolve) => setTimeout(resolve, 4000));
       const response = await axios.get(
-        `http://localhost:4000/customers?_page=${page}&_per_page=4`
+        `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`
       );
-      setCustomers(response.data);
+      setLenghtCustomers(response.data.items);
+      setPage(pageRef.current + 1);
+      if (customersInfiniteRef.current.length !== response.data.items) {
+        setCustomersInfinite([
+          ...customersInfiniteRef.current,
+          ...response.data.data,
+        ]);
+      }
+      // ATENÇÃO A LINHA DEBAIXO é usada apenas quando você está usando sistema de paginação
+      // setCustomers(response.data);
       setLoading(false);
     } catch (error) {}
+  }, []);
+
+  useEffect(() => {
+    pageRef.current = page;
   }, [page]);
+
+  useEffect(() => {
+    customersInfiniteRef.current = customersInfinite;
+  }, [customersInfinite]);
 
   useEffect(() => {
     fetchAllCustomers();
@@ -185,7 +217,7 @@ export default function Dashboard() {
             </section>
             <section className="text-2xl font-semibold">CLIENTES</section>
           </section>
-          <section>
+          <section className="flex gap-2">
             <Button
               onClick={() => {
                 router.push("/dashboard/customers/add");
@@ -197,16 +229,37 @@ export default function Dashboard() {
               <Plus />
               Adicionar Clientes
             </Button>
+            <Dudu
+              color="primary"
+              className="flex gap-2 !pl-2"
+              onClick={() => {
+                router.push("/dashboard/customers/add");
+                store.setCustomerToUpdate(null);
+              }}>
+              <Plus /> Adicionar Clientes
+            </Dudu>
           </section>
         </section>
         {!loading ? (
           <>
             <section id="CARDS-CUSTOMERS">
-              {customers?.data.map((customer) => (
-                <CardCustomer customer={customer} key={customer.id} />
-              ))}
+              <InfiniteScroll
+                dataLength={customersInfinite.length}
+                next={fetchAllCustomers}
+                hasMore={customersInfinite.length < lenghtCustomers}
+                // hasMore={false}
+                loader={<InfiniteLoader />}>
+                {customersInfinite.map((customer) => (
+                  <CardCustomer
+                    customer={customer}
+                    key={customer.id}
+                    inactive={customer.inactive}
+                    className="mb-6 rounded-none"
+                  />
+                ))}
+              </InfiniteScroll>
             </section>
-            <section
+            {/* <section
               id="TABLE-CUSTOMERS"
               className="hidden sm:flex mt-6 overflow-x-auto">
               <Table className="w-full min-w-[800px]">
@@ -242,7 +295,7 @@ export default function Dashboard() {
                   ))}
                 </TableBody>
               </Table>
-            </section>
+            </section> */}
             {/* <section className="mt-10">
               <Pagination>
                 <PaginationContent>
@@ -294,14 +347,14 @@ export default function Dashboard() {
                 </PaginationContent>
               </Pagination>
             </section> */}
-            <section className="hidden sm:flex mt-10 justify-center">
+            {/* <section className="hidden sm:flex mt-10 justify-center">
               <Pagination
                 total={10}
                 initialPage={1}
                 showControls
                 onChange={handlePage}
               />
-            </section>
+            </section> */}
           </>
         ) : (
           <section className="mt-20 flex flex-col gap-4 font-semibold justify-center items-center">

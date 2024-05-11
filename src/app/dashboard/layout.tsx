@@ -31,12 +31,15 @@ export default function RootLayout({
       {renderPage && (
         <>
           <section className="bg-black h-20 w-fulll p-4 flex justify-between">
-            <section id="LOGO" className="h-full flex items-center w-fit">
+            <section id="LOGO" className="w-40 h-10 flex items-center">
               <Image
+                priority={true}
                 src="/next-white.svg"
                 alt="Logo NextJS"
-                width={150}
-                height={50}
+                width="0"
+                height="0"
+                sizes="100vw"
+                className="w-full h-auto"
               />
             </section>
             <section

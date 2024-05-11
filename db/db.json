@@ -9,7 +9,8 @@
       "state": "PR",
       "postal_code": "80000-000",
       "country": "Brazil",
-      "id": "4"
+      "id": "4",
+      "inactive": true
     },
     {
       "id": "5",

@@ -9,14 +9,27 @@ import {
   Image,
 } from "@nextui-org/react";
 import { Pencil as PencilIcon, Trash2 as BinIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ICardCustomerProps {
   customer: ICustomer;
+  className?: string;
+  inactive: boolean;
 }
 
 export default function CardCustomer(props: ICardCustomerProps) {
   return (
-    <Card className="w-full border border-primary/15 rounded-md p-4 ">
+    <Card
+      className={cn(
+        props.inactive ? "!border-red-500" : "",
+        props.className,
+        "relative w-full border border-primary/15 p-4"
+      )}>
+      {props.inactive && (
+        <section className="absolute top-4 right-4 bg-red-500 text-xs text-white rounded-md px-3 py-1">
+          Inativo
+        </section>
+      )}
       <CardHeader className="flex gap-3 items-center pb-4">
         <Image
           alt="nextui logo"
