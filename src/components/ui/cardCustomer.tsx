@@ -10,22 +10,34 @@ import {
 } from "@nextui-org/react";
 import { Pencil as PencilIcon, Trash2 as BinIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+// import { useStore } from "@/stores";
+// import { useRouter } from "next/navigation";
 
 interface ICardCustomerProps {
   customer: ICustomer;
   className?: string;
-  inactive: boolean;
+  inactive: string;
+  handleUpdateCustomer: (customer: ICustomer) => void;
+  handleOpenDialog: (idCustomer: number) => void;
 }
 
 export default function CardCustomer(props: ICardCustomerProps) {
+  // const router = useRouter();
+  // const store = useStore();
+
+  // function handleUpdateCustomer(customer: ICustomer) {
+  //   store.setCustomerToUpdate(customer);
+  //   router.push("/dashboard/customers/add");
+  // }
+
   return (
     <Card
       className={cn(
-        props.inactive ? "!border-red-500" : "",
+        props.inactive === "true" ? "!border-red-500" : "",
         props.className,
         "relative w-full border border-primary/15 p-4"
       )}>
-      {props.inactive && (
+      {props.inactive === "true" && (
         <section className="absolute top-4 right-4 bg-red-500 text-xs text-white rounded-md px-3 py-1">
           Inativo
         </section>
@@ -53,7 +65,12 @@ export default function CardCustomer(props: ICardCustomerProps) {
       </CardBody>
       <Divider />
       <CardFooter className="flex justify-end pt-4 gap-4">
-        <PencilIcon /> <BinIcon />
+        <button onClick={() => props.handleUpdateCustomer(props.customer)}>
+          <PencilIcon />
+        </button>
+        <button onClick={() => props.handleOpenDialog(props.customer.id)}>
+          <BinIcon />
+        </button>
       </CardFooter>
     </Card>
   );

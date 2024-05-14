@@ -7,8 +7,19 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
+  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import axios from "axios";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
@@ -26,11 +37,8 @@ import {
   ICustomerResponseWithPagiation,
 } from "@/interfaces/Customers";
 import { useStore } from "@/stores";
-import CardCustomer from "@/components/ui/cardCustomer";
-import { Button as Dudu, ButtonGroup } from "@nextui-org/button";
-import InfiniteScroll from "react-infinite-scroll-component";
-import InfiniteLoader from "@/components/ui/infiniteLoader";
-import { Switch } from "@nextui-org/switch";
+import { Pagination } from "@nextui-org/pagination";
+import { Button as Dudu } from "@nextui-org/button";
 
 export default function ListCustomers() {
   const router = useRouter();
@@ -43,17 +51,13 @@ export default function ListCustomers() {
     items: 0,
     data: [],
   });
-  const [customersInfinite, setCustomersInfinite] = useState<ICustomer[]>([]);
-  const customersInfiniteRef = useRef(customersInfinite);
   const [loading, setLoading] = useState(true);
+  const [loadingTable, setLoadingTable] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [page, setPage] = useState(1);
-  const pageRef = useRef(page);
   const [customerToDelete, setCustomerToDelete] = useState<number>(0);
-  const [lenghtCustomers, setLenghtCustomers] = useState(-1);
-  const [filterByInactive, setFilterByInactive] = useState(false);
-  const [firstFilterApplied, setFirstFilterApplied] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
   const store = useStore();
 
   function handleOpenDialog(idCustomer: number) {
@@ -81,56 +85,26 @@ export default function ListCustomers() {
 
   const fetchAllCustomers = useCallback(async () => {
     try {
+      setLoadingTable(true);
       // Simula um atraso de 2 segundos (2000 milissegundos)
       await new Promise((resolve) => setTimeout(resolve, 4000));
-
-      let url;
-
-      if (filterByInactive) {
-        url = `http://localhost:4000/customers?inactive=${filterByInactive}&_page=${pageRef.current}&_per_page=8`;
-      } else {
-        url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
-      }
-
-      const response = await axios.get(url);
-      setLenghtCustomers(response.data.items);
-      setPage(pageRef.current + 1);
-      if (customersInfiniteRef.current.length !== response.data.items) {
-        // setCustomersInfinite([
-        //   ...customersInfiniteRef.current,
-        //   ...response.data.data,
-        // ]);
-        if (!firstFilterApplied) {
-          setFirstFilterApplied(true);
-          setCustomersInfinite(response.data.data);
-        } else {
-          setCustomersInfinite([
-            ...customersInfiniteRef.current,
-            ...response.data.data,
-          ]);
-        }
-      }
+      const response = await axios.get(
+        `http://localhost:4000/customers?_page=${page}&_per_page=8`
+      );
+      setTotalPages(response.data.pages);
+      setCustomers(response.data);
       setLoading(false);
+      setLoadingTable(false);
     } catch (error) {}
-  }, [filterByInactive, firstFilterApplied]);
-
-  useEffect(() => {
-    pageRef.current = page;
   }, [page]);
-
-  useEffect(() => {
-    setLoading(true);
-    setFirstFilterApplied(false);
-    setPage(1);
-  }, [filterByInactive]);
-
-  useEffect(() => {
-    customersInfiniteRef.current = customersInfinite;
-  }, [customersInfinite]);
 
   useEffect(() => {
     fetchAllCustomers();
   }, [fetchAllCustomers]);
+
+  function handlePage(page: number) {
+    setPage(page);
+  }
 
   return (
     <main className="flex flex-col items-center justify-start p-8 gap-10 flex-1">
@@ -217,34 +191,60 @@ export default function ListCustomers() {
             </Dudu>
           </section>
         </section>
-        <section id="TOOGLE" className="mt-2 mb-6 flex gap-4">
-          <section>Somente inativos?</section>
-          <Switch
-            onValueChange={(isSelected) => setFilterByInactive(isSelected)}
-            aria-label="Filtrar Inativos (Cego)"
-          />
-        </section>
         {!loading ? (
           <>
-            <section id="CARDS-CUSTOMERS" className="overflow-hidden">
-              <InfiniteScroll
-                className="!overflow-hidden"
-                dataLength={customersInfinite.length}
-                next={fetchAllCustomers}
-                hasMore={customersInfinite.length < lenghtCustomers}
-                // hasMore={false}
-                loader={<InfiniteLoader />}>
-                {customersInfinite.map((customer) => (
-                  <CardCustomer
-                    customer={customer}
-                    key={customer.id}
-                    inactive={customer.inactive}
-                    className="mb-6 rounded-none"
-                    handleUpdateCustomer={handleUpdateCustomer}
-                    handleOpenDialog={handleOpenDialog}
-                  />
-                ))}
-              </InfiniteScroll>
+            <section
+              id="TABLE-CUSTOMERS"
+              className="relative hidden sm:flex mt-6 overflow-x-auto justify-center">
+              {loadingTable && (
+                <section className="absolute mt-32">
+                  <Spinner size="w-20 h-20" />
+                </section>
+              )}
+              <Table
+                className={`w-full min-w-[800px] ${
+                  loadingTable ? "opacity-20" : ""
+                }`}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[100px]">#</TableHead>
+                    <TableHead>Nome</TableHead>
+                    <TableHead>Cidade/UF</TableHead>
+                    <TableHead className="text-right">Ações</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {customers?.data.map((customer) => (
+                    <TableRow key={customer.id}>
+                      <TableCell className="font-medium">
+                        {customer.id}
+                      </TableCell>
+                      <TableCell>{customer.name}</TableCell>
+                      <TableCell>{customer.city}</TableCell>
+                      <TableCell className="text-right ">
+                        <button
+                          className="text-blue-500"
+                          onClick={() => handleUpdateCustomer(customer)}>
+                          Editar
+                        </button>
+                        <button
+                          className="text-red-500 ml-4"
+                          onClick={() => handleOpenDialog(customer.id)}>
+                          Excluir
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </section>
+            <section className="hidden sm:flex mt-10 justify-center">
+              <Pagination
+                total={totalPages}
+                initialPage={1}
+                showControls
+                onChange={handlePage}
+              />
             </section>
           </>
         ) : (

@@ -193,6 +193,8 @@ using `zodResolver` with a Zod schema (`CustomerZodSchema`) for form validation.
                   <section>
                     <Label htmlFor="name">CPF</Label>
                     <Input
+                      readOnly={store.customerToUpdate !== null ? true : false}
+                      defaultValue={store.customerToUpdate?.cpf}
                       {...registerWithMask("cpf", ["999.999.999-99"], {
                         required: true,
                       })}
@@ -208,8 +210,8 @@ using `zodResolver` with a Zod schema (`CustomerZodSchema`) for form validation.
                       id="name"
                       type="text"
                       placeholder="Digite o nome"
-                      // readOnly={store.customerToUpdate !== null ? true : false}
-                      // defaultValue={store.customerToUpdate?.name}
+                      readOnly={store.customerToUpdate !== null ? true : false}
+                      defaultValue={store.customerToUpdate?.name}
                       className={errors.name?.message ? "border-red-500" : ""}
                       {...register("name")}
                     />

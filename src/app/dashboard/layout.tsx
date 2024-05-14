@@ -46,14 +46,31 @@ export default function RootLayout({
               id="MENU"
               className="hidden lg:flex flex-1 items-center justify-center">
               <ul className="text-white text-sm font-semibold flex gap-10">
-                <li onClick={() => router.push("/dashboard/")}>Dashboard</li>
-                <li onClick={() => router.push("/dashboard/customers")}>
-                  Clientes
+                <li
+                  className="cursor-pointer"
+                  onClick={() => router.push("/dashboard/")}>
+                  Dashboard
                 </li>
-                <li onClick={() => router.push("/dashboard/users")}>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => router.push("/dashboard/customers")}>
+                  Clientes Infinite
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() =>
+                    router.push("/dashboard/customers/pagination")
+                  }>
+                  Clientes Pagination
+                </li>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => router.push("/dashboard/users")}>
                   Usuários
                 </li>
-                <li onClick={() => router.push("/dashboard/my-profile")}>
+                <li
+                  className="cursor-pointer"
+                  onClick={() => router.push("/dashboard/my-profile")}>
                   Meu Perfil
                 </li>
               </ul>

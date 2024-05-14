@@ -44,6 +44,9 @@ export default function ListCustomers() {
     data: [],
   });
   const [customersInfinite, setCustomersInfinite] = useState<ICustomer[]>([]);
+  const [customersInfinitePrevious, setCustomersInfinitePrevious] = useState<
+    ICustomer[]
+  >([]);
   const customersInfiniteRef = useRef(customersInfinite);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -55,6 +58,19 @@ export default function ListCustomers() {
   const [filterByInactive, setFilterByInactive] = useState(false);
   const [firstFilterApplied, setFirstFilterApplied] = useState(false);
   const store = useStore();
+
+  function handleFilterByInactive(isSelected: boolean) {
+    // setFilterByInactive(isSelected);
+    setCustomersInfinitePrevious(customersInfinite);
+    if (isSelected) {
+      const customersFiltred = customersInfinite.filter(
+        (customer) => customer.inactive === "true"
+      );
+      setCustomersInfinite(customersFiltred);
+    } else {
+      setCustomersInfinite(customersInfinitePrevious);
+    }
+  }
 
   function handleOpenDialog(idCustomer: number) {
     setCustomerToDelete(idCustomer);
@@ -84,13 +100,14 @@ export default function ListCustomers() {
       // Simula um atraso de 2 segundos (2000 milissegundos)
       await new Promise((resolve) => setTimeout(resolve, 4000));
 
-      let url;
+      let url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
 
-      if (filterByInactive) {
-        url = `http://localhost:4000/customers?inactive=${filterByInactive}&_page=${pageRef.current}&_per_page=8`;
-      } else {
-        url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
-      }
+      // if (filterByInactive) {
+      //   // url = `http://localhost:4000/customers?inactive=${filterByInactive}&_page=${pageRef.current}&_per_page=8`;
+      //   url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
+      // } else {
+      //   url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
+      // }
 
       const response = await axios.get(url);
       setLenghtCustomers(response.data.items);
@@ -112,17 +129,11 @@ export default function ListCustomers() {
       }
       setLoading(false);
     } catch (error) {}
-  }, [filterByInactive, firstFilterApplied]);
+  }, [firstFilterApplied]);
 
   useEffect(() => {
     pageRef.current = page;
   }, [page]);
-
-  useEffect(() => {
-    setLoading(true);
-    setFirstFilterApplied(false);
-    setPage(1);
-  }, [filterByInactive]);
 
   useEffect(() => {
     customersInfiniteRef.current = customersInfinite;
@@ -220,7 +231,7 @@ export default function ListCustomers() {
         <section id="TOOGLE" className="mt-2 mb-6 flex gap-4">
           <section>Somente inativos?</section>
           <Switch
-            onValueChange={(isSelected) => setFilterByInactive(isSelected)}
+            onValueChange={(isSelected) => handleFilterByInactive(isSelected)}
             aria-label="Filtrar Inativos (Cego)"
           />
         </section>

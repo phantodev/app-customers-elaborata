@@ -10,18 +10,20 @@
       "postal_code": "80000-000",
       "country": "Brazil",
       "id": "4",
-      "inactive": true
+      "inactive": "true"
     },
     {
       "id": "5",
       "name": "Pedro Almeida",
+      "cpf": "032.924.479-89",
       "email": "pedro@example.com",
       "phone": "+5511222222222",
       "address": "Alameda dos Girassóis, 654",
       "city": "Porto Alegre",
       "state": "RS",
       "postal_code": "90000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "true"
     },
     {
       "id": "6",
@@ -32,7 +34,8 @@
       "city": "Fortaleza",
       "state": "CE",
       "postal_code": "60000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "7",
@@ -43,7 +46,8 @@
       "city": "Salvador",
       "state": "BA",
       "postal_code": "40000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "8",
@@ -54,7 +58,8 @@
       "city": "Recife",
       "state": "PE",
       "postal_code": "50000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "9",
@@ -65,7 +70,8 @@
       "city": "Manaus",
       "state": "AM",
       "postal_code": "69000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "11",
@@ -76,7 +82,8 @@
       "city": "Belém",
       "state": "PA",
       "postal_code": "66000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "12",
@@ -87,7 +94,8 @@
       "city": "Porto Velho",
       "state": "RO",
       "postal_code": "76800-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "13",
@@ -98,7 +106,8 @@
       "city": "Boa Vista",
       "state": "RR",
       "postal_code": "69300-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "14",
@@ -109,7 +118,8 @@
       "city": "Cuiabá",
       "state": "MT",
       "postal_code": "78000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "15",
@@ -120,7 +130,8 @@
       "city": "Campo Grande",
       "state": "MS",
       "postal_code": "79000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "16",
@@ -131,7 +142,8 @@
       "city": "Teresina",
       "state": "PI",
       "postal_code": "64000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "17",
@@ -142,7 +154,8 @@
       "city": "Natal",
       "state": "RN",
       "postal_code": "59000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "18",
@@ -153,7 +166,8 @@
       "city": "João Pessoa",
       "state": "PB",
       "postal_code": "58000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "19",
@@ -164,7 +178,8 @@
       "city": "Maceió",
       "state": "AL",
       "postal_code": "57000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "20",
@@ -175,7 +190,8 @@
       "city": "Aracaju",
       "state": "SE",
       "postal_code": "49000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "name": "Carlos Marçal",
@@ -186,7 +202,8 @@
       "state": "PR",
       "postal_code": "81170-370",
       "country": "Brasil",
-      "id": "0dcb"
+      "id": "0dcb",
+      "inactive": "false"
     },
     {
       "id": "a6cd",
@@ -199,7 +216,8 @@
       "city": "Curitiba",
       "state": "PR",
       "postal_code": "81170-370",
-      "country": "Brasil"
+      "country": "Brasil",
+      "inactive": "false"
     },
     {
       "id": "25",
@@ -210,7 +228,8 @@
       "city": "Porto Alegre",
       "state": "RS",
       "postal_code": "90000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "26",
@@ -221,7 +240,8 @@
       "city": "Fortaleza",
       "state": "CE",
       "postal_code": "60000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "27",
@@ -232,7 +252,8 @@
       "city": "Salvador",
       "state": "BA",
       "postal_code": "40000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "28",
@@ -243,7 +264,8 @@
       "city": "Recife",
       "state": "PE",
       "postal_code": "50000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "29",
@@ -254,7 +276,8 @@
       "city": "Manaus",
       "state": "AM",
       "postal_code": "69000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "211",
@@ -265,7 +288,8 @@
       "city": "Belém",
       "state": "PA",
       "postal_code": "66000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "212",
@@ -276,7 +300,8 @@
       "city": "Porto Velho",
       "state": "RO",
       "postal_code": "76800-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "213",
@@ -287,7 +312,8 @@
       "city": "Boa Vista",
       "state": "RR",
       "postal_code": "69300-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "214",
@@ -298,7 +324,8 @@
       "city": "Cuiabá",
       "state": "MT",
       "postal_code": "78000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "215",
@@ -309,7 +336,8 @@
       "city": "Campo Grande",
       "state": "MS",
       "postal_code": "79000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "216",
@@ -320,7 +348,8 @@
       "city": "Teresina",
       "state": "PI",
       "postal_code": "64000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "217",
@@ -331,7 +360,8 @@
       "city": "Natal",
       "state": "RN",
       "postal_code": "59000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "218",
@@ -342,7 +372,8 @@
       "city": "João Pessoa",
       "state": "PB",
       "postal_code": "58000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "219",
@@ -353,7 +384,8 @@
       "city": "Maceió",
       "state": "AL",
       "postal_code": "57000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "id": "220",
@@ -364,7 +396,8 @@
       "city": "Aracaju",
       "state": "SE",
       "postal_code": "49000-000",
-      "country": "Brazil"
+      "country": "Brazil",
+      "inactive": "false"
     },
     {
       "name": "Carlos Marçal",
@@ -375,20 +408,8 @@
       "state": "PR",
       "postal_code": "81170-370",
       "country": "Brasil",
+      "inactive": "false",
       "id": "20dcb"
-    },
-    {
-      "id": "2a6cd",
-      "name": "Eduardo Burko",
-      "cpf": "032.924.479-50",
-      "how_meet": "Facebook",
-      "email": "kduburko@gmail.com",
-      "phone": "(41) 01266-2666",
-      "address": "Rua Angelina Turesso Cavalim",
-      "city": "Curitiba",
-      "state": "PR",
-      "postal_code": "81170-370",
-      "country": "Brasil"
     }
   ],
   "login": {

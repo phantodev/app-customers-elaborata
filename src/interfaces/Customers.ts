@@ -3,7 +3,7 @@ export interface ICustomer {
   name: string;
   cpf: string;
   email: string;
-  inactive: boolean;
+  inactive: string;
   phone: string;
   address: string;
   city: string;
