@@ -24,7 +24,7 @@ import axios from "axios";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   Dialog,
@@ -52,7 +52,6 @@ export default function ListCustomers() {
     items: 0,
     data: [],
   });
-  const [filteredCustomers, setFilteredCustomers] = useState<ICustomer[]>();
   const [loading, setLoading] = useState(true);
   const [loadingTable, setLoadingTable] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -62,6 +61,7 @@ export default function ListCustomers() {
   const [totalPages, setTotalPages] = useState(0);
   const store = useStore();
   const [query, setQuery] = useState("");
+  const [searchParam, setSearchParam] = useState("");
 
   function handleOpenDialog(idCustomer: number) {
     setCustomerToDelete(idCustomer);
@@ -92,29 +92,29 @@ export default function ListCustomers() {
       // Simula um atraso de 2 segundos (2000 milissegundos)
       await new Promise((resolve) => setTimeout(resolve, 4000));
       const response = await axios.get(
-        `http://localhost:4000/customers?_page=${page}&_per_page=20`
+        `http://localhost:4000/customers?name=${searchParam}&_page=${page}&_per_page=20`
       );
-      setFilteredCustomers(response.data.data);
       setTotalPages(response.data.pages);
       setCustomers(response.data);
       setLoading(false);
       setLoadingTable(false);
     } catch (error) {}
-  }, [page]);
+  }, [page, searchParam]);
 
   useEffect(() => {
     fetchAllCustomers();
   }, [fetchAllCustomers]);
 
-  useEffect(() => {
-    const filtered = customers.data.filter((customer) => {
-      return customer.name.toLowerCase().includes(query.toLowerCase());
-    });
-    setFilteredCustomers(filtered);
-  }, [query, customers.data]);
+  // useEffect(() => {
+
+  // }, [query]);
 
   function handlePage(page: number) {
     setPage(page);
+  }
+
+  function handleSearch() {
+    setSearchParam(query);
   }
 
   return (
@@ -202,11 +202,26 @@ export default function ListCustomers() {
             </Dudu>
           </section>
         </section>
-        <section>
-          <Input
-            type="search"
-            onChange={(e) => setQuery(e.currentTarget.value)}
-          />
+        <section className="flex gap-4">
+          <section className="relative w-full">
+            <Input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.currentTarget.value)}
+            />
+            {query !== "" && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setQuery("");
+                  setSearchParam("");
+                }}
+                className="top-0 right-0 absolute">
+                <X />
+              </Button>
+            )}
+          </section>
+          <Button onClick={handleSearch}>Buscar</Button>
         </section>
         {!loading ? (
           <>
@@ -231,7 +246,7 @@ export default function ListCustomers() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {filteredCustomers?.map((customer) => (
+                  {customers?.data.map((customer) => (
                     <TableRow key={customer.id}>
                       <TableCell className="font-medium">
                         {customer.id}
