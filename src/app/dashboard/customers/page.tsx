@@ -82,16 +82,13 @@ export default function ListCustomers() {
   const fetchAllCustomers = useCallback(async () => {
     try {
       // Simula um atraso de 2 segundos (2000 milissegundos)
-      await new Promise((resolve) => setTimeout(resolve, 4000));
-
+      // await new Promise((resolve) => setTimeout(resolve, 4000));
       let url;
-
       if (filterByInactive) {
         url = `http://localhost:4000/customers?inactive=${filterByInactive}&_page=${pageRef.current}&_per_page=8`;
       } else {
         url = `http://localhost:4000/customers?_page=${pageRef.current}&_per_page=8`;
       }
-
       const response = await axios.get(url);
       setLenghtCustomers(response.data.items);
       setPage(pageRef.current + 1);
@@ -141,11 +138,13 @@ export default function ListCustomers() {
         enterTo="opacity-100"
         leave="duration-500 ease-out"
         leaveFrom="opacity-100"
-        leaveTo="opacity-0">
+        leaveTo="opacity-0"
+      >
         <Dialog
           open={isOpen}
           onClose={() => setIsOpen(false)}
-          className="relative z-50">
+          className="relative z-50"
+        >
           <div className="fixed inset-0 flex w-screen items-center justify-center p-4 bg-black/50">
             <DialogPanel className="max-w-lg space-y-4 border bg-white p-12">
               <DialogTitle className="font-bold text-2xl">
@@ -159,14 +158,16 @@ export default function ListCustomers() {
                   variant="outline"
                   disabled={isDeleting}
                   onClick={() => setIsOpen(false)}
-                  className="w-20">
+                  className="w-20"
+                >
                   Cancel
                 </Button>
                 <Button
                   variant="destructive"
                   onClick={handleDeleteCustomer}
                   className={isDeleting ? "w-20 opacity-50" : "w-20"}
-                  disabled={isDeleting}>
+                  disabled={isDeleting}
+                >
                   {isDeleting ? <Spinner size="w-4 h-4" /> : "Excluir"}
                 </Button>
               </div>
@@ -202,7 +203,8 @@ export default function ListCustomers() {
               }}
               type="button"
               variant="outline"
-              className="text-primary flex gap-2 !pl-2">
+              className="text-primary flex gap-2 !pl-2"
+            >
               <Plus />
               Adicionar Clientes
             </Button>
@@ -212,7 +214,8 @@ export default function ListCustomers() {
               onClick={() => {
                 router.push("/dashboard/customers/add");
                 store.setCustomerToUpdate(null);
-              }}>
+              }}
+            >
               <Plus /> Adicionar Clientes
             </Dudu>
           </section>
@@ -233,7 +236,8 @@ export default function ListCustomers() {
                 next={fetchAllCustomers}
                 hasMore={customersInfinite.length < lenghtCustomers}
                 // hasMore={false}
-                loader={<InfiniteLoader />}>
+                loader={<InfiniteLoader />}
+              >
                 {customersInfinite.map((customer) => (
                   <CardCustomer
                     customer={customer}
