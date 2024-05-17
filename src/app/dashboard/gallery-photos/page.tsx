@@ -25,6 +25,8 @@ import { IStatusFetch } from "@/interfaces/Main";
 import { Spinner } from "@/components/ui/spinner";
 
 import ResizeFile from "react-image-file-resizer";
+import useImageResize from "@/hooks/useImagemResize";
+import useImageResizer from "@/hooks/useImagemResize";
 
 export default function Dashboard() {
   const thumbsContainer: CSSProperties = {
@@ -82,10 +84,9 @@ export default function Dashboard() {
 
   async function onDrop(acceptedFiles: File[]) {
     try {
-      const base64File = await resizeFile(acceptedFiles[0]);
-      if (typeof base64File === "string") {
-        files.push(base64File);
-      }
+      // Aqui vocês farão a lógica de converter o tamanho da imagem + axios
+      const randomImageURL = `https://picsum.photos/seed/${Math.random()}/200/300`;
+      files.push(randomImageURL);
     } catch (error) {
       console.error("Error converting file to base64:", error);
     }
@@ -108,64 +109,22 @@ export default function Dashboard() {
     });
   }
 
-  // async function resizeFile2(file: File): Promise<string> {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
+  const resizeImage = useImageResizer();
 
-  //     reader.onload = function (event) {
-  //       const img = new Image();
-
-  //       img.onload = function () {
-  //         const canvas = document.createElement("canvas");
-  //         const ctx = canvas.getContext("2d");
-
-  //         const MAX_WIDTH = 300;
-  //         const MAX_HEIGHT = 300;
-
-  //         let width = img.width;
-  //         let height = img.height;
-
-  //         if (width > height) {
-  //           if (width > MAX_WIDTH) {
-  //             height *= MAX_WIDTH / width;
-  //             width = MAX_WIDTH;
-  //           }
-  //         } else {
-  //           if (height > MAX_HEIGHT) {
-  //             width *= MAX_HEIGHT / height;
-  //             height = MAX_HEIGHT;
-  //           }
-  //         }
-
-  //         canvas.width = width;
-  //         canvas.height = height;
-
-  //         if (ctx) {
-  //           // Agora podemos usar ctx com segurança
-  //           ctx.drawImage(img, 0, 0, width, height);
-  //         } else {
-  //           // Lidar com o caso em que ctx é nulo
-  //           console.error("Contexto do canvas é nulo");
-  //         }
-
-  //         const resizedDataURL = canvas.toDataURL("image/jpeg", 0.7); // 0.7 é a qualidade da imagem (de 0 a 1)
-
-  //         resolve(resizedDataURL);
-  //       };
-
-  //       img.onerror = function (error: any) {
-  //         reject(error);
-  //       };
-
-  //       img.src = event.target?.result as string;
-  //     };
-
-  //     reader.onerror = function (error) {
-  //       reject(error);
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   });
+  // async function onDrop(acceptedFiles: File[]) {
+  //   try {
+  //     const imagemRedimensionada = await resizeImage(
+  //       acceptedFiles[0],
+  //       100,
+  //       100
+  //     );
+  //     console.log(imagemRedimensionada);
+  //     // if (typeof imagemRedimensionada === "string") {
+  //     //   files.push(imagemRedimensionada);
+  //     // }
+  //   } catch (error) {
+  //     console.error("Erro ao converter arquivo para base64:", error);
+  //   }
   // }
 
   const {

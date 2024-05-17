@@ -8,6 +8,11 @@ const nextConfig = {
         hostname: "avatars.githubusercontent.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        port: "",
+      },
     ],
   },
 };
