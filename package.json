@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "cypress run && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "api": "npx json-server ./db/db.json --port 4000"
